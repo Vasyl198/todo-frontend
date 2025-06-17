@@ -13,7 +13,7 @@ function App() {
   // Загрузка задач с бэкенда
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/tasks')
+      .get('https://todo-backend.onrender.com/api/tasks')
       .then((response) => setTasks(response.data))
       .catch((error) => console.error('Error fetching tasks:', error));
   }, []);
@@ -22,7 +22,7 @@ function App() {
   const addTask = () => {
     if (newTask.trim()) {
       axios
-        .post('http://localhost:5000/api/tasks', { text: newTask })
+       .post('https://todo-backend.onrender.com/api/tasks', { text: newTask })
         .then((response) => {
           setTasks([...tasks, response.data]);
           setNewTask('');
@@ -38,7 +38,7 @@ function App() {
       return;
     }
     axios
-      .delete(`http://localhost:5000/api/tasks/${id}`)
+      .delete(`https://todo-backend.onrender.com/api/tasks/${id}`)
       .then(() => {
         setTasks(tasks.filter((task) => task._id !== id));
       })
@@ -52,7 +52,7 @@ function App() {
       return;
     }
     axios
-      .put(`http://localhost:5000/api/tasks/${id}`, { completed: !completed })
+      .put(`https://todo-backend.onrender.com/api/tasks/${id}`, { completed: !completed })
       .then((response) => {
         setTasks(tasks.map((task) => (task._id === id ? response.data : task)));
       })
@@ -73,7 +73,7 @@ function App() {
     }
     if (editText.trim()) {
       axios
-        .put(`http://localhost:5000/api/tasks/${id}`, { text: editText })
+        .put(`https://todo-backend.onrender.com/api/tasks/${id}`, { text: editText })
         .then((response) => {
           setTasks(tasks.map((task) => (task._id === id ? response.data : task)));
           setEditingTask(null);
